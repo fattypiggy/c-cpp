@@ -10,6 +10,14 @@ struct Books
     char author[50];
     char subject[100];
 };
+
+// 共用体，允许在相同的内存位置存储不同的数据类型，同时只能用到一个成员
+union Data
+{
+    int i;
+    float f;
+    char str[20];
+};
 /* 函数声明 */
 void printBook(struct Books book);
 
@@ -40,6 +48,11 @@ int main(int argc, char const *argv[])
     strcpy(book1.subject, "Six Six Six");
     strcpy(book1.title, "快乐风男");
 
+    union Data data;
+    data.i = 10;
+    data.f = 11.1f;
+    printf("data.i: %d\n", data.i); // data.i: 1093769626 因为最后赋值给变量的值占用了内存位置
+    printf("data.f: %f\n", data.f); // data.f: 11.100000 所以data.f能正确输出
     printf("a的地址是：%p\n", &a);
     ptr = &a;
     printf("a的值是：%d\n", *ptr);
