@@ -3,13 +3,13 @@
 #include <string.h>
 
 
-struct Books
+typedef struct Books // 由typedef编译器进行解释
 {
     int id;
     char title[50];
     char author[50];
     char subject[100];
-};
+} Book;
 
 // 共用体，允许在相同的内存位置存储不同的数据类型，同时只能用到一个成员
 union Data
@@ -23,6 +23,8 @@ void printBook(struct Books book);
 
 static int num = 10; // 全局静态变量
 
+#define TRUE 1 // C语言指令，预编译器进行处理
+
 int main(int argc, char const *argv[])
 {
     /* code */
@@ -35,12 +37,21 @@ int main(int argc, char const *argv[])
     char str[] = "string";
     int len = strlen(str);
     
+    FILE *fp;
+    fp = fopen("file.txt", "w+");
+    fprintf(fp, "This is testing for fprintf...\n");
+    fputs("This is testing for fputs...\n", fp);
+    fclose(fp);
+
     int *ptr1 = NULL;
     char *ptr2 = 0; // 地址为0或者NULL都代表不指向一个可用的内存地址
     printf("ptr1: %p\n", ptr1); // 0x0
     printf("ptr2: %p\n", ptr2); // 0x0
     printf("ptr1大小: %lu\n", sizeof(ptr1)); // 8位32字节16进制数
     printf("ptr1的地址: %p\n", &ptr);
+
+    printf("Value of TRUE: %d\n", TRUE);
+    
     struct Books book1;
     struct Books books[10];
     book1.id = 1;
